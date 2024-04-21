@@ -413,6 +413,248 @@ public class DataBase {
                         """
                 );
 
+                //Nico
+                result = session.run("""
+                        MATCH (a:Artista {name:"Carly Rae Jepsen"}), (c:Cancion {name:"Call Me Maybe"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Call Me Maybe"}), (g:Genero {name:"Bubblegum Pop"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Moby"}), (c:Cancion {name:"Porcelain"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Porcelain"}), (g:Genero {name:"Electronica"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Sigur Rós"}), (c:Cancion {name:"Hoppípolla"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Hoppípolla"}), (g:Genero {name:"Post-Rock"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Enya"}), (c:Cancion {name:"Only Time"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Only Time"}), (g:Genero {name:"New Age"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Vangelis"}), (c:Cancion {name:"Chariots of Fire"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Chariots of Fire"}), (g:Genero {name:"Synth-Score"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Björk"}), (c:Cancion {name:"Joga"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Joga"}), (g:Genero {name:"Experimental"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Steve Aoki"}), (c:Cancion {name:"Delirious"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Delirious"}), (g:Genero {name:"EDM"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Yann Tiersen"}), (c:Cancion {name:"Comptine d'un autre été : L'après-midi"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Comptine d'un autre été : L'après-midi"}), (g:Genero {name:"Minimalist"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Armin van Buuren"}), (c:Cancion {name:"Blah Blah Blah"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Blah Blah Blah"}), (g:Genero {name:"Trance"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Boards of Canada"}), (c:Cancion {name:"Dayvan Cowboy"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Dayvan Cowboy"}), (g:Genero {name:"Ambient"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Buena Vista Social Club"}), (c:Cancion {name:"Chan Chan"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Chan Chan"}), (g:Genero {name:"Son Cubano"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Ludovico Einaudi"}), (c:Cancion {name:"Nuvole Bianche"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Nuvole Bianche"}), (g:Genero {name:"Classical Crossover"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Brian Eno"}), (c:Cancion {name:"An Ending (Ascent)"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"An Ending (Ascent)"}), (g:Genero {name:"Ambient"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Sufjan Stevens"}), (c:Cancion {name:"Chicago"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Chicago"}), (g:Genero {name:"Indie Folk"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Explosions in the Sky"}), (c:Cancion {name:"Your Hand in Mine"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Your Hand in Mine"}), (g:Genero {name:"Post-Rock"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Kraftwerk"}), (c:Cancion {name:"Autobahn"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Autobahn"}), (g:Genero {name:"Electronic"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Aphex Twin"}), (c:Cancion {name:"Avril 14th"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Avril 14th"}), (g:Genero {name:"Electronica"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Alt-J"}), (c:Cancion {name:"Breezeblocks"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Breezeblocks"}), (g:Genero {name:"Indie Pop"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Massive Attack"}), (c:Cancion {name:"Teardrop"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"Teardrop"}), (g:Genero {name:"Trip Hop"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (a:Artista {name:"Tame Impala"}), (c:Cancion {name:"The Less I Know the Better"})
+                        MERGE (a)-[e:WATCH]-(c)
+                        RETURN a.name, e, c.name
+                        """
+                );
+                result = session.run("""
+                        MATCH (c:Cancion {name:"The Less I Know the Better"}), (g:Genero {name:"Psychedelic Rock"})
+                        MERGE (c)-[e:WATCH]-(g)
+                        RETURN c.name, e, g.name
+                        """
+                );
+
                 while (result.hasNext()) {
                         Record record = result.next();
                         System.out.println(record);
