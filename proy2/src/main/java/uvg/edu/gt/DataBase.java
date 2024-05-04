@@ -12,7 +12,7 @@ public class DataBase {
                 "bolt://localhost:7687",
                 AuthTokens.basic(
                         "neo4j",
-                        "12345678"
+                        "123456789"
 
                 ));
         
@@ -77,8 +77,7 @@ public class DataBase {
                 tx.run("CREATE (user:Cancion {name:'Purple Rain'})");
                 tx.run("CREATE (user:Cancion {name:'Bohemian Rhapsody'})");
                 tx.run("CREATE (user:Cancion {name:'Umbrella'})");
-                tx.run("CREATE (user:Cancion {name:'Hips Don't Lie'})");
-                //Nico
+                tx.run("CREATE (user:Cancion {name:'Hips Don\\'t Lie'})");
                 tx.run("CREATE (user: Genero {name:'Bubblegum Pop'})");
                 tx.run("CREATE (user: Genero {name:'Electronica'})");
                 tx.run("CREATE (user: Genero {name:'Post-Rock'})");
@@ -99,7 +98,6 @@ public class DataBase {
                 tx.run("CREATE (user: Genero {name:'Indie Pop'})");
                 tx.run("CREATE (user: Genero {name:'Trip Hop'})");
                 tx.run("CREATE (user: Genero {name:'Psychedelic Rock'})");
-                //Artistas
                 tx.run("CREATE (user: Artista {name:'Carly Rae Jepsen'})");
                 tx.run("CREATE (user: Artista {name:'Moby'})");
                 tx.run("CREATE (user: Artista {name:'Sigur Rós'})");
@@ -120,7 +118,6 @@ public class DataBase {
                 tx.run("CREATE (user: Artista {name:'Alt-J'})");
                 tx.run("CREATE (user: Artista {name:'Massive Attack'})");
                 tx.run("CREATE (user: Artista {name:'Tame Impala'})");
-                //Canciones
                 tx.run("CREATE (user: Cancion {name:'Call Me Maybe'})");
                 tx.run("CREATE (user: Cancion {name:'Porcelain'})");
                 tx.run("CREATE (user: Cancion {name:'Hoppípolla'})");
@@ -128,7 +125,7 @@ public class DataBase {
                 tx.run("CREATE (user: Cancion {name:'Chariots of Fire'})");
                 tx.run("CREATE (user: Cancion {name:'Joga'})");
                 tx.run("CREATE (user: Cancion {name:'Delirious'})");
-                tx.run("CREATE (user: Cancion {name:'Comptine d'un autre été : L'après-midi'})");
+                tx.run("CREATE (user: Cancion {name:'Comptine d\\'un autre été : L\\'après-midi'})");
                 tx.run("CREATE (user: Cancion {name:'Blah Blah Blah'})");
                 tx.run("CREATE (user: Cancion {name:'Dayvan Cowboy'})");
                 tx.run("CREATE (user: Cancion {name:'Chan Chan'})");
@@ -401,13 +398,13 @@ public class DataBase {
                 );
 
                 result = session.run("""
-                        MATCH (a:Artista {name:"Shakira"}), (c:Cancion {name:"Hips Don't Lie"})
+                        MATCH (a:Artista {name:"Shakira"}), (c:Cancion {name:"Hips Don\\'t Lie"})
                         MERGE (a)-[e:WATCH]-(c)
                         RETURN a.name, e, c.name
                         """
                 );
                 result = session.run("""
-                        MATCH (c:Cancion {name:"Hips Don't Lie"}), (g:Genero {name:"Pop"})
+                        MATCH (c:Cancion {name:"Hips Don\\'t Lie"}), (g:Genero {name:"Pop"})
                         MERGE (c)-[e:WATCH]-(g)
                         RETURN c.name, e, g.name
                         """
@@ -499,13 +496,13 @@ public class DataBase {
                         """
                 );
                 result = session.run("""
-                        MATCH (a:Artista {name:"Yann Tiersen"}), (c:Cancion {name:"Comptine d'un autre été : L'après-midi"})
+                        MATCH (a:Artista {name:"Yann Tiersen"}), (c:Cancion {name:"Comptine d\\'un autre été : L\\'après-midi"})
                         MERGE (a)-[e:WATCH]-(c)
                         RETURN a.name, e, c.name
                         """
                 );
                 result = session.run("""
-                        MATCH (c:Cancion {name:"Comptine d'un autre été : L'après-midi"}), (g:Genero {name:"Minimalist"})
+                        MATCH (c:Cancion {name:"Comptine d\\'un autre été : L\\'après-midi"}), (g:Genero {name:"Minimalist"})
                         MERGE (c)-[e:WATCH]-(g)
                         RETURN c.name, e, g.name
                         """
