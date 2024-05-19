@@ -22,14 +22,17 @@ import java.util.Base64;
  * Clase que gestiona la base de datos de usuarios y sus preferencias.
  */
 public class UserDB {
-    private static final String USERS_CSV = "users.csv";
-    private static final String PREFERENCIAS_CSV = "preferenciasUsuario.csv";
+    private static final String USERS_CSV = "src/main/resources/users.csv";
+    private static final String PREFERENCIAS_CSV = "src/main/resources/preferenciasUsuario.csv";
     private static Map<String, Usuario> usuarios = new HashMap<>();
 
     static {
         cargarUsuariosDesdeCSV();
     }
 
+    /**
+     * Carga los usuarios desde un archivo CSV.
+     */
     private static void cargarUsuariosDesdeCSV() {
         try (CSVReader reader = new CSVReaderBuilder(new FileReader(USERS_CSV)).build()) {
             List<String[]> data = reader.readAll();
@@ -46,6 +49,11 @@ public class UserDB {
         }
     }
 
+    /**
+     * Registra un nuevo usuario en la base de datos.
+     *
+     * @param usuario El usuario a registrar.
+     */
     public static void registrarUsuario(Usuario usuario) {
         if (!usuarios.containsKey(usuario.getUsuario())) {
             usuarios.put(usuario.getUsuario(), usuario);
@@ -56,6 +64,11 @@ public class UserDB {
         }
     }
 
+    /**
+     * Guarda un usuario en el archivo CSV.
+     *
+     * @param usuario El usuario a guardar.
+     */
     private static void guardarUsuarioEnCSV(Usuario usuario) {
         try (CSVWriter writer = new CSVWriter(new FileWriter(USERS_CSV, true))) {
             String[] record = {usuario.getNombre(), usuario.getUsuario(), usuario.getCorreo(), usuario.getContrasena()};
@@ -65,6 +78,13 @@ public class UserDB {
         }
     }
 
+    /**
+     * Inicia sesión para un usuario.
+     *
+     * @param usuario    El nombre de usuario.
+     * @param contrasena La contraseña del usuario.
+     * @return true si las credenciales son correctas, false en caso contrario.
+     */
     public static boolean iniciarSesion(String usuario, String contrasena) {
         Usuario u = usuarios.get(usuario);
         if (u == null) {
@@ -75,6 +95,12 @@ public class UserDB {
         return u.getContrasena().equals(hashedContrasena);
     }
 
+    /**
+     * Genera el hash de una contraseña.
+     *
+     * @param contrasena La contraseña a hashear.
+     * @return El hash de la contraseña.
+     */
     private static String hashContrasena(String contrasena) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -85,6 +111,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * Agrega una preferencia de usuario en el archivo CSV.
+     *
+     * @param usuario     El nombre de usuario.
+     * @param preferencia La preferencia a agregar.
+     */
     public static void agregarPreferenciaCSV(String usuario, String preferencia) {
         Map<String, String> preferenciasUsuarios = new HashMap<>();
 
@@ -112,6 +144,9 @@ public class UserDB {
         }
     }
 
+    /**
+     * Imprime los usuarios cargados desde el archivo CSV.
+     */
     public static void imprimirUsuariosCargados() {
         System.out.println("Usuarios cargados desde el CSV:");
         for (Usuario u : usuarios.values()) {
@@ -119,4 +154,3 @@ public class UserDB {
         }
     }
 }
-

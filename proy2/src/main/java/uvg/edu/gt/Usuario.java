@@ -15,6 +15,15 @@ public class Usuario {
     private String correo;
     private String contrasena;
 
+    /**
+     * Constructor de la clase Usuario.
+     *
+     * @param nombre      Nombre del usuario.
+     * @param usuario     Nombre de usuario.
+     * @param correo      Correo del usuario.
+     * @param contrasena  Contraseña del usuario.
+     * @param isHashed    Indica si la contraseña ya está hasheada.
+     */
     public Usuario(String nombre, String usuario, String correo, String contrasena, boolean isHashed) {
         this.nombre = nombre;
         this.usuario = usuario;
