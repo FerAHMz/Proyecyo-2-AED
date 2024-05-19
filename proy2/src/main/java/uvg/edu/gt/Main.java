@@ -2,7 +2,7 @@ package uvg.edu.gt;
 
 import java.util.Scanner;
 
-public class Prototipo {
+public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenido al prototipo del proyecto");
