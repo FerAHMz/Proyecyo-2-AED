@@ -125,4 +125,23 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+
+    @SuppressWarnings("deprecation")
+    public List<String> obtenerNombresDeNodos(String tipo) {
+        List<String> nombres = new ArrayList<>();
+        try (Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                String query = "MATCH (n:" + tipo + ") RETURN n.name AS name";
+                Result result = tx.run(query);
+                while (result.hasNext()) {
+                    Record record = result.next();
+                    nombres.add(record.get("name").asString());
+                }
+                return null;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nombres;
+    }
 }
