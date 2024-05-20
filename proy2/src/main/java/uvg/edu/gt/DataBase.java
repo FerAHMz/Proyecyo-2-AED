@@ -39,4 +39,18 @@ public class DataBase {
             System.out.println("Error al crear nodo: " + e.getMessage());
         }
     }
+
+    @SuppressWarnings("deprecation")
+    public void crearRelacion(String tipo1, String nombre1, String relacion, String tipo2, String nombre2) {
+        try (Session session = driver.session()) {
+            String query = "MATCH (a:" + tipo1 + " {name: $nombre1}), (b:" + tipo2 + " {name: $nombre2}) " +
+                    "MERGE (a)-[r:" + relacion + "]->(b)";
+            session.writeTransaction(tx -> {
+                tx.run(query, Values.parameters("nombre1", nombre1, "nombre2", nombre2)).consume();
+                return null;
+            });
+        } catch (Exception e) {
+            System.out.println("Error al crear relación: " + e.getMessage());
+        }
+    }
 }
