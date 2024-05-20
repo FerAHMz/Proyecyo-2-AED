@@ -53,4 +53,33 @@ public class Main {
                 }
             }
             
-            
+            sc.close();
+            db.close();
+        }
+    
+        private static void registrarse(Scanner scanner) {
+            System.out.println("Ingrese su nombre:");
+            String nombre = scanner.nextLine();
+            System.out.println("Ingrese su usuario:");
+            String usuario = scanner.nextLine();
+            System.out.println("Ingrese su correo:");
+            String correo = scanner.nextLine();
+            System.out.println("Ingrese su contraseña:");
+            String contrasena = scanner.nextLine();
+    
+            Usuario nuevoUsuario = new Usuario(nombre, usuario, correo, contrasena, false);
+            UserDB.registrarUsuario(nuevoUsuario);
+        }
+    
+        private static void iniciarSesion(Scanner scanner) {
+            System.out.println("Ingrese su usuario:");
+            String usuario = scanner.nextLine();
+            System.out.println("Ingrese su contraseña:");
+            String contrasena = scanner.nextLine();
+    
+            if (UserDB.iniciarSesion(usuario, contrasena)) {
+                mostrarMenuRecomendaciones(scanner, usuario);
+            } else {
+                System.out.println("Usuario o contraseña incorrectos.");
+            }
+        }
