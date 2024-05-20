@@ -53,4 +53,18 @@ public class DataBase {
             System.out.println("Error al crear relación: " + e.getMessage());
         }
     }
+    
+    @SuppressWarnings("deprecation")
+    public void eliminarNodo(String tipo, String nombre) {
+        try (Session session = driver.session()) {
+            session.writeTransaction(tx -> {
+                String query = String.format("MATCH (n:%s {name: $name}) DETACH DELETE n", tipo);
+                tx.run(query, Values.parameters("name", nombre));
+                return null;
+            });
+            System.out.println("Nodo " + tipo + " con nombre " + nombre + " eliminado.");
+        } catch (Exception e) {
+            System.out.println("Error al eliminar nodo: " + e.getMessage());
+        }
+    }
 }
