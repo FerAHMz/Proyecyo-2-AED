@@ -193,4 +193,9 @@ public class DataBase {
         }
         return obtenerAleatorias(recomendaciones, 5);
     }
+
+    private List<String> obtenerAleatorias(List<String> lista, int max) {
+        Collections.shuffle(lista, new Random());
+        return lista.size() > max ? lista.subList(0, max) : lista;
+    }
 }
