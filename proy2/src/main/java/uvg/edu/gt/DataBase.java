@@ -155,4 +155,21 @@ public class DataBase {
             });
         }
     }
+
+    @SuppressWarnings("deprecation")
+    public List<String> obtenerRecomendacionesPorGenero(String genero) {
+        List<String> recomendaciones = new ArrayList<>();
+        try (Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                Result result = tx.run("MATCH (g:Genero {name: $name})<-[:PERTENECE_A]-(c:Cancion)-[:CANTA]->(a:Artista) RETURN c.name AS cancion, a.name AS artista",
+                        org.neo4j.driver.Values.parameters("name", genero));
+                while (result.hasNext()) {
+                    Record record = result.next();
+                    recomendaciones.add("Genero: " + genero + " - Artista: " + record.get("artista").asString() + " - Cancion: " + record.get("cancion").asString());
+                }
+                return null;
+            });
+        }
+        return obtenerAleatorias(recomendaciones, 5);
+    }
 }
