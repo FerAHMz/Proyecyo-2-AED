@@ -83,3 +83,55 @@ public class Main {
                 System.out.println("Usuario o contraseña incorrectos.");
             }
         }
+
+        private static void mostrarMenuRecomendaciones(Scanner scanner, String usuario) {
+            boolean continuar = true;
+            while (continuar) {
+                System.out.println("***************");
+                System.out.println("Inicio de sesión exitoso.");
+                System.out.println("***************");
+                System.out.println("¿Qué recomendación deseas ver?");
+                System.out.println("\u001B[33m1. Recomendación de Géneros");
+                System.out.println("\u001B[35m2. Recomendación de Artistas");
+                System.out.println("\u001B[36m3. Agregar una Cancion");
+                System.out.println("\u001B[0m4. Quitar una Cancion");
+                System.out.println("\u001B[31m5. Cerrar sesión");
+    
+                int recomendacion = scanner.nextInt();
+                scanner.nextLine(); 
+    
+                switch (recomendacion) {
+                    case 1:
+                        recomendarGenero(scanner, usuario);
+                        break;
+                    case 2:
+                        recomendarArtista(scanner, usuario);
+                        break;
+                    case 3:
+                        System.out.println("Ingrese el nombre de la canción que desea agregar:");
+                        String cancion = scanner.nextLine();
+                        System.out.println("Ingrese el nombre del artista de la canción:");
+                        String artista = scanner.nextLine();
+                        System.out.println("Ingrese el género de la canción:");
+                        String genero = scanner.nextLine();
+                        agregarCancion(cancion, artista, genero);
+                        break;
+                    case 4: 
+                        System.out.println("Ingrese el nombre de la canción que desea quitar:");
+                        String cancionQuitar = scanner.nextLine();
+                        System.out.println("Ingrese el nombre del artista de la canción:");
+                        String artistaQuitar = scanner.nextLine();
+                        System.out.println("Ingrese el género de la canción:");
+                        String generoQuitar = scanner.nextLine();
+                        quitarCancion(cancionQuitar, artistaQuitar, generoQuitar);
+                        break;
+                    case 5:
+                        continuar = false;
+                        System.out.println("Cerrando sesión...");
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                        break;
+                }
+            }
+        }
