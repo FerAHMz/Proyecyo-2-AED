@@ -17,5 +17,12 @@ import java.util.List;
 import java.util.Random;
 
 public class DataBase {
-    
+    public final Driver driver;
+
+    public DataBase(String uri, String user, String password) {
+        driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
+    }
+    public void close() {
+        driver.close();
+    }   
 }
