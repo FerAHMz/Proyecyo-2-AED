@@ -172,4 +172,25 @@ public class DataBase {
         }
         return obtenerAleatorias(recomendaciones, 5);
     }
+
+    @SuppressWarnings("deprecation")
+    public List<String> obtenerRecomendacionesPorArtista(String artista) {
+        List<String> recomendaciones = new ArrayList<>();
+        try (Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                System.out.println("Buscando recomendaciones para el artista: " + artista); // Mensaje de depuración
+                Result result = tx.run("MATCH (a:Artista {name: $name})-[:CANTA]->(c:Cancion)-[:PERTENECE_A]->(g:Genero) " +
+                        "RETURN c.name AS cancion, g.name AS genero",
+                        Values.parameters("name", artista));
+                while (result.hasNext()) {
+                    Record record = result.next();
+                    recomendaciones.add("Genero: " + record.get("genero").asString() + " - Cancion: " + record.get("cancion").asString());
+                }
+                return null;
+            });
+        } catch (Exception e) {
+            System.out.println("Error al obtener recomendaciones por artista: " + e.getMessage());
+        }
+        return obtenerAleatorias(recomendaciones, 5);
+    }
 }
