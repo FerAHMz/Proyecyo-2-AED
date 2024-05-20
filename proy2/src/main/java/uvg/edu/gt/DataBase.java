@@ -78,4 +78,34 @@ public class DataBase {
             });
         }
     }
+
+    public void importarDesdeCSV(String rutaArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            boolean primeraLinea = true;
+            while ((linea = br.readLine()) != null) {
+                if (primeraLinea) {
+                    primeraLinea = false;
+                    continue; // Saltar la primera línea (cabecera)
+                }
+                String[] valores = linea.split(";");
+                if (valores.length != 3) {
+                    System.out.println("Línea no válida: " + linea);
+                    continue;
+                }
+                String cancion = valores[0].trim();
+                String artista = valores[1].trim();
+                String genero = valores[2].trim();
+
+                crearNodo("Cancion", cancion);
+                crearNodo("Artista", artista);
+                crearNodo("Genero", genero);
+
+                crearRelacion("Artista", artista, "CANTA", "Cancion", cancion);
+                crearRelacion("Cancion", cancion, "PERTENECE_A", "Genero", genero);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
