@@ -144,4 +144,15 @@ public class DataBase {
         }
         return nombres;
     }
+
+    @SuppressWarnings("deprecation")
+    public boolean existeCancion(String cancion) {
+        try (Session session = driver.session()) {
+            return session.readTransaction(tx -> {
+                Result result = tx.run("MATCH (c:Cancion {name: $name}) RETURN c",
+                        Values.parameters("name", cancion));
+                return result.hasNext();
+            });
+        }
+    }
 }
