@@ -198,4 +198,24 @@ public class DataBase {
         Collections.shuffle(lista, new Random());
         return lista.size() > max ? lista.subList(0, max) : lista;
     }
+
+    public static void main(String[] args) {
+        String uri = "bolt://localhost:7687";
+        String user = "neo4j";
+        String password = "123456789"; // Asegúrate de que esta sea la contraseña correcta para tu base de datos Neo4j
+
+        DataBase db = new DataBase(uri, user, password);
+
+        // Verificar la conexión
+        try (Session session = db.driver.session()) {
+            session.run("RETURN 1");
+            System.out.println("Conexión exitosa a Neo4j");
+        } catch (Exception e) {
+            System.out.println("Error de conexión a Neo4j: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+
+        db.close();
+    }
 }
