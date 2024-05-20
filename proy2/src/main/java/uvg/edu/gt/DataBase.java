@@ -53,7 +53,7 @@ public class DataBase {
             System.out.println("Error al crear relación: " + e.getMessage());
         }
     }
-    
+
     @SuppressWarnings("deprecation")
     public void eliminarNodo(String tipo, String nombre) {
         try (Session session = driver.session()) {
@@ -65,6 +65,17 @@ public class DataBase {
             System.out.println("Nodo " + tipo + " con nombre " + nombre + " eliminado.");
         } catch (Exception e) {
             System.out.println("Error al eliminar nodo: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public boolean existeRelacion(String tipo, String tipo1, String tipo2, String nombre1, String nombre2) {
+        try (Session session = driver.session()) {
+            return session.readTransaction(tx -> {
+                Result result = tx.run("MATCH (a:" + tipo1 + " {name: $name1})-[r:" + tipo + "]->(b:" + tipo2 + " {name: $name2}) RETURN r",
+                        org.neo4j.driver.Values.parameters("name1", nombre1, "name2", nombre2));
+                return result.hasNext();
+            });
         }
     }
 }
