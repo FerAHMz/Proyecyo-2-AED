@@ -22,7 +22,21 @@ public class DataBase {
     public DataBase(String uri, String user, String password) {
         driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
+
     public void close() {
         driver.close();
     }   
+
+    @SuppressWarnings("deprecation")
+    public void crearNodo(String tipo, String nombre) {
+        try (Session session = driver.session()) {
+            String query = "MERGE (n:" + tipo + " {name: $name}) RETURN n";
+            session.writeTransaction(tx -> {
+                tx.run(query, Values.parameters("name", nombre)).consume();
+                return null;
+            });
+        } catch (Exception e) {
+            System.out.println("Error al crear nodo: " + e.getMessage());
+        }
+    }
 }
