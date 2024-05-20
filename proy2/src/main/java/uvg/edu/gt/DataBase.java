@@ -108,4 +108,21 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+
+    @SuppressWarnings("deprecation")
+    public void verificarNodos(String tipo) {
+        try (Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                Result result = tx.run(String.format("MATCH (n:%s) RETURN n.name AS name", tipo));
+                while (result.hasNext()) {
+                    Record record = result.next();
+                    System.out.println(record.get("name").asString());
+                }
+                return null;
+            });
+        } catch (Exception e) {
+            System.out.println("Error al verificar nodos: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
