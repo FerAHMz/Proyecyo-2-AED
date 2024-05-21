@@ -199,23 +199,44 @@ public class DataBase {
         return lista.size() > max ? lista.subList(0, max) : lista;
     }
 
-    public static void main(String[] args) {
-        String uri = "bolt://localhost:7687";
-        String user = "neo4j";
-        String password = "123456789"; // Asegúrate de que esta sea la contraseña correcta para tu base de datos Neo4j
-
-        DataBase db = new DataBase(uri, user, password);
-
-        // Verificar la conexión
-        try (Session session = db.driver.session()) {
-            session.run("RETURN 1");
-            System.out.println("Conexión exitosa a Neo4j");
-        } catch (Exception e) {
-            System.out.println("Error de conexión a Neo4j: " + e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-
-        db.close();
+    @SuppressWarnings("deprecation")
+    public List<String> obtenerGenerosPorArtista(String artista) {
+            List<String> generos = new ArrayList<>();
+            try (Session session = driver.session()) {
+                    session.readTransaction(tx -> {
+                    Result result = tx.run("MATCH (a:Artista {name: $name})-[:CANTA]->(c:Cancion)-[:PERTENECE_A]->(g:Genero) " +
+                                    "RETURN DISTINCT g.name AS genero",
+                            Values.parameters("name", artista));
+                    while (result.hasNext()) {
+                            Record record = result.next();
+                            generos.add(record.get("genero").asString());
+                    }
+                    return null;
+                    });
+            } catch (Exception e) {
+                    System.out.println("Error al obtener géneros por artista: " + e.getMessage());
+            }
+            return generos;
     }
+
+    @SuppressWarnings("deprecation")
+    public List<String> obtenerCancionesPorArtistaYGenero(String artista, String genero) {
+            List<String> recomendaciones = new ArrayList<>();
+            try (Session session = driver.session()) {
+                    session.readTransaction(tx -> {
+                    Result result = tx.run("MATCH (a:Artista {name: $artista})-[:CANTA]->(c:Cancion)-[:PERTENECE_A]->(g:Genero {name: $genero}) " +
+                                    "RETURN c.name AS cancion",
+                            Values.parameters("artista", artista, "genero", genero));
+                    while (result.hasNext()) {
+                            Record record = result.next();
+                            recomendaciones.add(record.get("cancion").asString());
+                    }
+                    return null;
+                    });
+            } catch (Exception e) {
+                    System.out.println("Error al obtener canciones por artista y género: " + e.getMessage());
+            }
+            return recomendaciones;
+    }
+
 }

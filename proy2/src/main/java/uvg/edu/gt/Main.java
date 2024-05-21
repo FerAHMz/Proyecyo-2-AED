@@ -99,7 +99,8 @@ public class Main {
                 System.out.println("\u001B[35m2. Recomendación de Artistas");
                 System.out.println("\u001B[36m3. Agregar una Cancion");
                 System.out.println("\u001B[0m4. Quitar una Cancion");
-                System.out.println("\u001B[31m5. Cerrar sesión");
+                System.out.println("\u001B[32m5. Recomendación por Artista y Género");
+                System.out.println("\u001B[31m6. Cerrar sesión");
     
                 int recomendacion = scanner.nextInt();
                 scanner.nextLine(); 
@@ -132,6 +133,9 @@ public class Main {
                         quitarCancion(cancionQuitar, artistaQuitar, generoQuitar);
                         break;
                     case 5:
+                        mostrarArtistasYGeneros(scanner);
+                        break;
+                    case 6:
                         continuar = false;
                         System.out.println("Cerrando sesión...");
                         break;
@@ -188,6 +192,43 @@ public class Main {
             }
             UserDB.agregarPreferenciaCSV(usuario, artistaElegido);
             System.out.println("Preferencia agregada exitosamente al CSV.");
+        }
+    }
+
+    private static void mostrarArtistasYGeneros(Scanner scanner) {
+        System.out.println("\u001B[0m");
+        List<String> artistas = db.obtenerNombresDeNodos("Artista");
+        System.out.println("Artistas disponibles:");
+        for (String artista : artistas) {
+            System.out.println(artista);
+        }
+        System.out.println("\u001B[33m¿Qué artista deseas ver?");
+        String artistaBuscar = scanner.nextLine();
+
+        List<String> generos = db.obtenerGenerosPorArtista(artistaBuscar);
+        if (generos.isEmpty()) {
+            System.out.println("No se encontraron géneros para el artista " + artistaBuscar);
+        } else {
+            System.out.println("\u001B[0mGéneros disponibles para el artista " + artistaBuscar + ":");
+            for (String generoDisponible : generos) {
+                System.out.println(generoDisponible);
+            }
+            System.out.println("Ingrese el género de la canción:");
+            String generoBuscar = scanner.nextLine();
+            recomendarPorArtistaYGenero(artistaBuscar, generoBuscar);
+        }
+    }
+
+    private static void recomendarPorArtistaYGenero(String artista, String genero) {
+        List<String> recomendaciones = db.obtenerCancionesPorArtistaYGenero(artista, genero);
+
+        if (recomendaciones.isEmpty()) {
+            System.out.println("No se encontraron canciones para el artista " + artista + " en el género " + genero);
+        } else {
+            System.out.println("Las canciones del artista " + artista + " en el género " + genero + " son:");
+            for (String recomendacion : recomendaciones) {
+                System.out.println(recomendacion);
+            }
         }
     }
 
