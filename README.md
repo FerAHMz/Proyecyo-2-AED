@@ -32,9 +32,11 @@ Este proyecto implementa un sistema de recomendación de música utilizando Neo4
 2.  Instalar dependencias Maven
    mvn clean install
 
-3. Asegúrate de que Neo4j esté corriendo y configurado correctamente. Actualiza las credenciales de conexión a la base de datos en la clase DataBase.
+3. Poner la ruta del archivo csv en el main para que funcione de manera correcta.
 
-4. Al tener encendido el neo4j asegurate de ingresar la contraseña al Main para funcionar de manera correcta
+4. Asegúrate de que Neo4j esté corriendo y configurado correctamente. Actualiza las credenciales de conexión a la base de datos en la clase DataBase.
+
+5. Al tener encendido el neo4j asegurate de ingresar la contraseña al Main para funcionar de manera correcta
 
 ## Uso
 

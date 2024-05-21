@@ -22,8 +22,8 @@ import java.util.Base64;
  * Clase que gestiona la base de datos de usuarios y sus preferencias.
  */
 public class UserDB {
-    private static final String USERS_CSV = "src/main/resources/users.csv";
-    private static final String PREFERENCIAS_CSV = "src/main/resources/preferenciasUsuario.csv";
+    private static final String USERS_CSV = "users.csv";
+    private static final String PREFERENCIAS_CSV = "preferenciasUsuario.csv";
     private static Map<String, Usuario> usuarios = new HashMap<>();
 
     static {

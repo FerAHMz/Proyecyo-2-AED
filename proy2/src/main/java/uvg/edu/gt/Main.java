@@ -14,7 +14,8 @@ import java.util.Scanner;
 public class Main {
 
     private static DataBase db;
-    private static final String rutaArchivo = "src/main/resources/data.csv";
+    private static final String rutaArchivo = "C:/Users/nicol/OneDrive/Documents/UVG/Tercer Semestre/Algoritmos y Estructura de Datos/Proyecyo-2-AED/proy2/src/main/java/uvg/edu/gt/data.csv";
+    //private static final String rutaArchivo = "src/main/resources/data.csv";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -111,6 +112,7 @@ public class Main {
                         recomendarArtista(scanner, usuario);
                         break;
                     case 3:
+                        System.out.println("\u001B[0m");
                         System.out.println("Ingrese el nombre de la canción que desea agregar:");
                         String cancion = scanner.nextLine();
                         System.out.println("Ingrese el nombre del artista de la canción:");
@@ -120,6 +122,7 @@ public class Main {
                         agregarCancion(cancion, artista, genero);
                         break;
                     case 4: 
+                        System.out.println("\u001B[0m");
                         System.out.println("Ingrese el nombre de la canción que desea quitar:");
                         String cancionQuitar = scanner.nextLine();
                         System.out.println("Ingrese el nombre del artista de la canción:");
@@ -147,14 +150,14 @@ public class Main {
             System.out.println(genero);
         }
 
-        System.out.println("¿Qué género deseas ver?");
+        System.out.println("\u001B[33m¿Qué género deseas ver?");
         String generoSeleccionado = scanner.nextLine();
 
         List<String> recomendaciones = db.obtenerRecomendacionesPorGenero(generoSeleccionado);
         if (recomendaciones.isEmpty()) {
             System.out.println("No se encontraron recomendaciones para el género " + generoSeleccionado);
         } else {
-            System.out.println("Las canciones de este género son:");
+            System.out.println("\u001B[37mLas canciones de este género son:");
             for (String recomendacion : recomendaciones) {
                 System.out.println(recomendacion);
             }
@@ -170,7 +173,7 @@ public class Main {
         for (String artista : artistas) {
             System.out.println(artista);
         }
-        System.out.println("¿Qué artista deseas ver?");
+        System.out.println("\u001B[33m¿Qué artista deseas ver?");
         String artistaElegido = scanner.nextLine();
         System.out.println("Artista elegido: " + artistaElegido); // Mensaje de depuración
 
@@ -179,7 +182,7 @@ public class Main {
         if (recomendaciones.isEmpty()) {
             System.out.println("No se encontraron recomendaciones para el artista " + artistaElegido);
         } else {
-            System.out.println("Las canciones de este artista son:");
+            System.out.println("\u001B[37mLas canciones de este artista son:");
             for (String recomendacion : recomendaciones) {
                 System.out.println(recomendacion);
             }
