@@ -1,3 +1,11 @@
+/**
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Nicolás Concuá - 23197
+ * Fernando Hernández - 23645
+ * Fernando Rueda - 23748
+ */
+
 package uvg.edu.gt;
 
 import java.io.BufferedWriter;

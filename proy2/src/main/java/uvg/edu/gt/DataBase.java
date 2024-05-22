@@ -16,6 +16,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Clase que gestiona la base de datos Neo4j.
+ */
 public class DataBase {
     public final Driver driver;
 
@@ -25,8 +28,14 @@ public class DataBase {
 
     public void close() {
         driver.close();
-    }   
+    }  
 
+    /**
+     * Crea un nodo en la base de datos Neo4j.
+     *
+     * @param tipo   El tipo de nodo (etiqueta).
+     * @param nombre El nombre del nodo.
+     */
     @SuppressWarnings("deprecation")
     public void crearNodo(String tipo, String nombre) {
         try (Session session = driver.session()) {
@@ -40,6 +49,15 @@ public class DataBase {
         }
     }
 
+    /**
+     * Crea una relación entre dos nodos en la base de datos Neo4j.
+     *
+     * @param tipo1     El tipo del primer nodo (etiqueta).
+     * @param nombre1   El nombre del primer nodo.
+     * @param relacion  El tipo de relación.
+     * @param tipo2     El tipo del segundo nodo (etiqueta).
+     * @param nombre2   El nombre del segundo nodo.
+     */
     @SuppressWarnings("deprecation")
     public void crearRelacion(String tipo1, String nombre1, String relacion, String tipo2, String nombre2) {
         try (Session session = driver.session()) {
@@ -54,6 +72,12 @@ public class DataBase {
         }
     }
 
+    /**
+     * Elimina un nodo de la base de datos Neo4j.
+     *
+     * @param tipo   El tipo de nodo (etiqueta).
+     * @param nombre El nombre del nodo.
+     */
     @SuppressWarnings("deprecation")
     public void eliminarNodo(String tipo, String nombre) {
         try (Session session = driver.session()) {
@@ -68,6 +92,16 @@ public class DataBase {
         }
     }
 
+    /**
+     * Verifica si existe una relación entre dos nodos en la base de datos Neo4j.
+     *
+     * @param tipo     El tipo de relación.
+     * @param tipo1    El tipo del primer nodo (etiqueta).
+     * @param tipo2    El tipo del segundo nodo (etiqueta).
+     * @param nombre1  El nombre del primer nodo.
+     * @param nombre2  El nombre del segundo nodo.
+     * @return true si la relación existe, false en caso contrario.
+     */
     @SuppressWarnings("deprecation")
     public boolean existeRelacion(String tipo, String tipo1, String tipo2, String nombre1, String nombre2) {
         try (Session session = driver.session()) {
@@ -79,6 +113,11 @@ public class DataBase {
         }
     }
 
+    /**
+     * Importa datos desde un archivo CSV y crea nodos y relaciones en la base de datos Neo4j.
+     *
+     * @param rutaArchivo La ruta del archivo CSV.
+     */
     public void importarDesdeCSV(String rutaArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -109,6 +148,11 @@ public class DataBase {
         }
     }
 
+    /**
+     * Verifica los nodos de un tipo específico en la base de datos Neo4j.
+     *
+     * @param tipo El tipo de nodo (etiqueta).
+     */
     @SuppressWarnings("deprecation")
     public void verificarNodos(String tipo) {
         try (Session session = driver.session()) {
@@ -126,6 +170,12 @@ public class DataBase {
         }
     }
 
+    /**
+     * Obtiene los nombres de nodos de un tipo específico en la base de datos Neo4j.
+     *
+     * @param tipo El tipo de nodo (etiqueta).
+     * @return Una lista con los nombres de los nodos.
+     */
     @SuppressWarnings("deprecation")
     public List<String> obtenerNombresDeNodos(String tipo) {
         List<String> nombres = new ArrayList<>();
@@ -145,6 +195,12 @@ public class DataBase {
         return nombres;
     }
 
+    /**
+     * Verifica si una canción existe en la base de datos Neo4j.
+     *
+     * @param cancion El nombre de la canción.
+     * @return true si la canción existe, false en caso contrario.
+     */
     @SuppressWarnings("deprecation")
     public boolean existeCancion(String cancion) {
         try (Session session = driver.session()) {
@@ -156,6 +212,12 @@ public class DataBase {
         }
     }
 
+    /**
+     * Obtiene recomendaciones de canciones por género.
+     *
+     * @param genero El nombre del género.
+     * @return Una lista con las recomendaciones.
+     */
     @SuppressWarnings("deprecation")
     public List<String> obtenerRecomendacionesPorGenero(String genero) {
         List<String> recomendaciones = new ArrayList<>();
@@ -173,6 +235,12 @@ public class DataBase {
         return obtenerAleatorias(recomendaciones, 5);
     }
 
+    /**
+     * Obtiene recomendaciones de canciones por artista.
+     *
+     * @param artista El nombre del artista.
+     * @return Una lista con las recomendaciones.
+     */
     @SuppressWarnings("deprecation")
     public List<String> obtenerRecomendacionesPorArtista(String artista) {
         List<String> recomendaciones = new ArrayList<>();
@@ -193,7 +261,14 @@ public class DataBase {
         }
         return obtenerAleatorias(recomendaciones, 5);
     }
-
+    
+    /**
+     * Obtiene una lista aleatoria de recomendaciones.
+     *
+     * @param lista La lista de recomendaciones.
+     * @param max   El número máximo de recomendaciones.
+     * @return Una lista con las recomendaciones aleatorias.
+     */
     private List<String> obtenerAleatorias(List<String> lista, int max) {
         Collections.shuffle(lista, new Random());
         return lista.size() > max ? lista.subList(0, max) : lista;
